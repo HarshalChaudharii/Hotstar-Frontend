@@ -8,12 +8,23 @@ import Footer from "./Footer";
 import SwiperSlider from "./SwiperSlider";
 import Link from "next/link";
 
+interface MovieData {
+  backdrop_path?: string;
+  original_title?: string;
+  runtime?: number;
+  spoken_languages?: { iso_639_1: string; name: string }[];
+  overview?: string;
+  genres?: { id: number; name: string }[];
+  // Add other properties as needed
+}
 const MovieDetail = ({ id, key }: any) => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState<MovieData>({});
   const [loading, setLoading] = useState(false);
-  const navigate = useRef(null);
+  const navigate = useRef<HTMLDivElement>(null);
   const scrollToTrailers = () => {
-    navigate.current.scrollIntoView({ behavior: "smooth" });
+    if (navigate.current) {
+      navigate.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
   useEffect(() => {
     setLoading(true);
@@ -98,7 +109,7 @@ const MovieDetail = ({ id, key }: any) => {
                             >
                               <span className="mr-3"> {item.name}</span>
 
-                              {index < data.genres.length - 1 && (
+                              {index < (data.genres?.length ?? 0) - 1 && (
                                 <div className="w-px h-4 mr-3 bg-gray-200" />
                               )}
                             </div>
