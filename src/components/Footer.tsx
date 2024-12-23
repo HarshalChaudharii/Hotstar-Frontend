@@ -6,26 +6,26 @@ const Footer = () => {
   return (
     <div className="text-white ml-64 w-full h-32 mt-36">
       <div className="flex flex-col ">
-        <div className="flex justify-between mr-64">
+        <div className="flex-col md:flex md:flex-wrap lg:flex-row justify-between mr-64">
           <div>
-            <h2 className="mb-6">Company</h2>
+            <h2 className=" lg:mb-6">Company</h2>
             <p className="text-slate-400">About Us</p>
             <p className="text-slate-400">Careers</p>
           </div>
           <div>
-            <h2 className="mb-6">Viewe Website in</h2>
+            <h2 className="mt-10 lg:mb-6">Viewe Website in</h2>
             <p className="text-slate-400 flex space-x-4">
               <Check /> <span>English</span>
             </p>
           </div>
           <div>
-            <h2 className="mb-6">Need Help?</h2>
+            <h2 className="mt-10 lg:mb-6">Need Help?</h2>
             <p className="text-slate-400">Visit Help Center</p>
             <p className="text-slate-400">Share Feedback</p>
           </div>
           <div>
-            <h2 className="mb-6">Connect with Us</h2>
-            <div className="flex space-x-8">
+            <h2 className="mt-10 lg:mb-6">Connect with Us</h2>
+            <div className="mt-10 flex lg:flex-row space-x-8">
               <Image
                 src="/assets/facebook.png"
                 alt="facebook"
@@ -36,7 +36,7 @@ const Footer = () => {
               <Image
                 src="/assets/tweeter.png"
                 width={30}
-                height={5}
+                height={11}
                 alt="X"
                 className="size-5 invert"
               />
@@ -44,7 +44,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex justify-between items-center">
+        <div className="w-20 mt-10 flex flex-col justify-start sm:flex-col lg:flex-row lg:justify-between items-center">
           <div>
             <p className="w-[300px] text-slate-400 text-sm ">
               © 2024 STAR. All Rights Reserved. Terms Of Use Privacy Policy FAQ

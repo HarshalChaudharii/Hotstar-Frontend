@@ -127,3 +127,36 @@
 .embla__dot--selected:after {
   box-shadow: inset 0 0 0 0.2rem var(--text-body);
 }
+
+@media (max-width: 1024px) {
+  .embla {
+    visibility: hidden;
+  }
+
+  .embla__slide {
+    height: 8vh;
+  }
+
+  .embla__container {
+    flex-direction: column;
+  }
+
+  .embla__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .embla {
+    height: 60vh;
+  }
+
+  .embla__slide {
+    height: 60vh;
+  }
+  .embla__slide__number {
+    font-size: 2rem;
+  }
+}

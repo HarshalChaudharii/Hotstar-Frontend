@@ -13,34 +13,28 @@ import {
 import { Card, CardContent } from "./ui/card";
 import Loader from "./Loader";
 
-const CarouselComponent = ({ title, category }: any) => {
+const MyCarousel = () => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
-    setLoading(true);
-    const options = {
-      method: "GET",
-      url: `https://api.themoviedb.org/3/movie/${category}`,
-      params: { language: "en-US", page: "1", region: "us" },
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMzdlNjRkMjE1YWM0NTM5ZDU3MGIzODY2NDc0MTg5YyIsIm5iZiI6MTcyNDMyMzQ3MS42NjE5ODEsInN1YiI6IjY2YzU5Mzc3YTEwNjYwMjNlY2QxMmNiOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.bsFHRmnK_nRVXBm0pfB12VjHA9UuqyluZy-qOZrhoAQ",
-      },
-    };
-
-    axios
-      .request(options)
-      .then(function (response) {
-        setData(response.data.results);
+    async function getMovies() {
+      try {
+        setLoading(true);
+        const response = await axios.get(`http://localhost:8000/action`, {
+          params: {
+            types: "Action",
+          },
+        });
+        setData(response.data.data); // Setting the data from the response
+      } catch (error) {
+        console.log(error);
+      } finally {
         setLoading(false);
-      })
-      .catch(function (error) {
-        setLoading(false);
-      });
-  }, [category]);
-  console.log(data);
+      }
+    }
+    getMovies();
+  }, []);
+  console.log("data hai: ", data);
   if (loading) {
     return (
       <>
@@ -59,21 +53,21 @@ const CarouselComponent = ({ title, category }: any) => {
       className="w-full max-w-full"
     >
       <CarouselContent>
-        {data.map((item) => (
+        {data.map((item, index) => (
           <CarouselItem
-            key={item.id}
+            key={index}
             className="basis-[180px] md:basis-[180px] lg:basis-[190px] rounde-xl "
           >
             <div className="roundex-2xl">
-              <Card className="w-[152px]  md:w-[152px] lg:w-44 rounded-2xl border-none">
+              <Card className="w-[152px]  md:w-[162px] lg:w-54 h-full bg-cover rounded-2xl border-none">
                 {/* <CardContent className="flex aspect-square items-center justify-center p-6"> */}
                 <Link href={`/details/${item.id}`}>
                   <Image
-                    src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
+                    src={`http://localhost:8000/images/${item.posterUrl}`}
                     width={200}
-                    height={10}
+                    height={200}
                     alt={item.title || "Movie Poster"}
-                    className="rounded-xl h-full w-full transition-transform transform hover:scale-110"
+                    className=" rounded-xl h-[200px] w-full bg-cover transition-transform transform hover:scale-110"
                     loading="lazy"
                   />
                 </Link>
@@ -95,4 +89,4 @@ const CarouselComponent = ({ title, category }: any) => {
   );
 };
 
-export default CarouselComponent;
+export default MyCarousel;

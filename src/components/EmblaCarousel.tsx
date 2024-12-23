@@ -18,7 +18,7 @@ export function EmblaCarousel() {
       <div className="embla__container">
         <div className="embla__slide relative">
           <div className="text-white absolute ">
-            <div className="flex h-full w-full ">
+            <div className="">
               <div className="w-[420px] absolute left-32 top-[140px] z-50">
                 <div className="mt-32">
                   <h3 className="text-sky-500 font-semibold mb-5">
